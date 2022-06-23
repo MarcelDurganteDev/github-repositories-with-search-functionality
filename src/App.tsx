@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Header from './components/Header/Header';
-import Footer from './components/Footer';
+import GlobalStyles from './styles/GlobalStyles';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 import Profile from './pages/profile/Profile';
-import Repository from './pages/Repository';
+import Repository from './pages/repository/Repository';
 
 function App () {
   return (
@@ -15,7 +16,8 @@ function App () {
         <Route path="/:username" element={<Profile />} />
         <Route path="/:username/:reponame" element={<Repository />} />
       </Routes>
-      <Footer/>
+      <Footer />
+      <GlobalStyles />
     </BrowserRouter>
   );
 }
