@@ -1,10 +1,22 @@
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-function App() {
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Profile from './pages/Profile';
+import Repository from './pages/Repository';
+
+function App () {
   return (
-    <div className="App">
-     <h1>Hello World!</h1>
-    </div>
+    <BrowserRouter>
+      <Header/> 
+      <Routes>
+        <Route path="/" element={<Profile />} />
+        <Route path="/:username" element={<Profile />} />
+        <Route path="/:username/:reponame" element={<Repository />} />
+      </Routes>
+      <Footer/>
+    </BrowserRouter>
   );
 }
 
