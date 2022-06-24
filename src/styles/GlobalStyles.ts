@@ -16,7 +16,7 @@ export default createGlobalStyle`
   border: 0;
   background: none;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
-  color: var(--black);
+  color: var(--primary);
 }
 
 ul {
