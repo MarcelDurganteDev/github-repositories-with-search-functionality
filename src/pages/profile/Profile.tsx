@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container, Main, LeftSide, RightSide } from './profileStyles';
 
-import ProfileData from '../../components/profileData/ProfileData';
+import ProfileData from '../../components/ProfileData/ProfileData';
 
 const Profile: React.FC = () => {
   return (

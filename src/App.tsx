@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import GlobalStyles from './styles/GlobalStyles';
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
-import Profile from './pages/profile/Profile';
-import Repository from './pages/repository/Repository';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Profile from './pages/Profile/Profile';
+import Repository from './pages/Repository/Repository';
 
 function App () {
   return (
