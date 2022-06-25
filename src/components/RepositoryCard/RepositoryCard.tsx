@@ -1,8 +1,25 @@
 import React from 'react'
 
-const RepositoryCard: React.FC = () => {
+interface Props {
+  username: string;
+  reponame: string;
+  description?: string;
+  language?: string;
+  stars: number;
+  forks: number;
+}
+
+
+const RepositoryCard: React.FC<Props> = ( {
+  username,
+  reponame,
+  description,
+  language,
+  stars,
+  forks,
+} ) => {
   return (
-    <div>RepositoryCard</div>
+    <div/>
   )
 }
 

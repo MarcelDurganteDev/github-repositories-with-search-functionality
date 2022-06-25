@@ -5,7 +5,7 @@ import GlobalStyles from './styles/GlobalStyles';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Profile from './pages/Profile/Profile';
-import Repository from './pages/Repository/Repository';
+import Repository from './pages/RepositoriesList/RepositoriesList';
 
 function App () {
   return (
