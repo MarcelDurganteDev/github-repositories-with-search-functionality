@@ -1,17 +1,64 @@
-import React from 'react';
-
-import { Container, Main, LeftSide, RightSide, RepositoriesList, RepositoryIcon, Tab } from './profileStyles';
-
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import {
+  Container,
+  Main,
+  LeftSide,
+  RightSide,
+  RepositoriesList,
+  RepositoryIcon,
+  Tab
+} from './profileStyles';
 import ProfileData from '../../components/ProfileData/ProfileData';
 import RepositoryCard from '../../components/RepositoryCard/RepositoryCard';
+import { APIUser, APIRepo } from '../../@types/customTypes';
+
+//  receives user, repositories, and/or error data (so I can show the error message) from the API
+// '?' optional case sth is not found/error
+interface Data {
+  user?: APIUser;
+  // list of repositories
+  repos?: APIRepo[];
+  error?: string;
+}
 
 const Profile: React.FC = () => {
+  // get username from url params
+  const { username = 'MarcelDurganteDev' } = useParams();
+  const [data, setData] = useState<Data>();
+  // after comoponent is mounted, get user data from API
+  useEffect(() => {
+    Promise.all([
+      fetch(`https://api.github.com/users/${username}`),
+      fetch(`https://api.github.com/users/${username}/repos`)
+    ]).then(async responses => {
+      // console.log(responses);
+      // console.log( [
+      //   await responses[0].json(),
+      //   await responses[1].json(),
+      // ]);
+      const [userResponse, repoResponse] = responses;
+
+      if (userResponse.status === 404) {
+        setData({ error: 'User not found!' });
+        return;
+      }
+
+      const user = await userResponse.json();
+      const repos = await repoResponse.json();
+
+      setData({
+        user,
+        repos
+      });
+    });
+  }, []);
 
   const TabContent = () => (
-    <div className="content">
+    <div className='content'>
       <RepositoryIcon />
-      <span className="label">Repositories</span>
-      <span className="number">81</span>
+      <span className='label'>Repositories</span>
+      <span className='number'>81</span>
     </div>
   );
 
@@ -21,7 +68,7 @@ const Profile: React.FC = () => {
         <LeftSide>
           <ProfileData
             username={'MarcelDurganteDev'}
-            name={'Guilherme Rodz'}
+            name={'MarcelDurganteDev'}
             avatarUrl={'https://avatars.githubusercontent.com/u/92659392?v=4'}
             followers={1}
             following={2}
