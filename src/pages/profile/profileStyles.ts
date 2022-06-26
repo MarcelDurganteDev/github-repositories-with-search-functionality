@@ -14,7 +14,8 @@ export const Main = styled.div`
   flex-direction: column;
   margin: 0 auto;
   // same max width as in GitHub
-  max-width: 1280px;
+  // @TODO: check why it is only working with '!important'
+  max-width: 1280px!important;
 
   @media (min-width: 768px) {
     flex-direction: row;
