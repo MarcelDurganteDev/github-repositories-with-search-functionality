@@ -46,8 +46,8 @@ const RepositoryCard: React.FC<Props> = ({
       <BottomSide>
         <ul>
           <li>
-            <div className={`laguage ${languageClass}`} />
-            <span>{`language ${language}`}</span>
+            <div className={`language ${languageClass}`} />
+            <span>{`${language}`}</span>
           </li>
           <li>
           <StarIcon />

@@ -1,11 +1,20 @@
 import React from 'react';
 
-import { Container, Main, LeftSide, RightSide, RepositoriesList } from './profileStyles';
+import { Container, Main, LeftSide, RightSide, RepositoriesList, RepositoryIcon, Tab } from './profileStyles';
 
 import ProfileData from '../../components/ProfileData/ProfileData';
 import RepositoryCard from '../../components/RepositoryCard/RepositoryCard';
 
 const Profile: React.FC = () => {
+
+  const TabContent = () => (
+    <div className="content">
+      <RepositoryIcon />
+      <span className="label">Repositories</span>
+      <span className="number">81</span>
+    </div>
+  );
+
   return (
     <Container>
       <Main>
@@ -23,6 +32,10 @@ const Profile: React.FC = () => {
           />
         </LeftSide>
         <RightSide>
+          <Tab className='mobile'>
+            <TabContent />
+            <span className='line'></span>
+          </Tab>
           {/* @TODO repo list */}
           <RepositoriesList>
             <h2>Repositories</h2>
@@ -41,6 +54,9 @@ const Profile: React.FC = () => {
               ))}
             </div>
           </RepositoriesList>
+          {/* @TODO: <RandomCalendar /> . Try find a replacement for react-heatmap-calendar that is not working with React 18.1.0 
+          Check this one if time allows  https://www.npmjs.com/package/@uiw/react-heat-map
+          */}
         </RightSide>
       </Main>
     </Container>

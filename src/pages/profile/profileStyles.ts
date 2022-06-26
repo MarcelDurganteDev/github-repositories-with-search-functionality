@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { RiBookMarkLine } from 'react-icons/ri';
 
 // most outer container
 
@@ -52,6 +53,54 @@ export const RepositoriesList = styled.div`
 
     @media (min-width: 768px) {
       grid-template-columns: 1fr 1fr;
+    }
+  }
+`;
+
+export const RepositoryIcon = styled(RiBookMarkLine)`
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+`;
+
+export const Tab = styled.div`
+  background: var(--primary);
+
+  .content {
+    display: flex;
+    // vertical center of the tab
+    align-items: center;
+    width: min-content;
+    padding: 14px 16px;
+    border-bottom: 2px solid var(--orange);
+
+    .label {
+      font-size: 14px;
+      font-weight: 600;
+      padding: 0 7px;
+    }
+
+    .number {
+      font-size: 12px;
+      background-color: var(--ticker);
+      padding: 2px 6px;
+      border-radius: 24px;
+    }
+  }
+ // @TODO: on desktop view line should pass behind avatar image
+  .line {
+    display: flex;
+    width: 100%;
+    border-bottom: 2px solid var(--border);
+  }
+
+  // fot tab class mobile view only adds space between tab and user info (right side vs. left side)
+  &.mobile {
+    margin-top: var(--verticalPadding);
+
+    // content of tab class mobile horizontaly aligned (auto)
+    .content {
+      margin: 0 auto;
     }
   }
 `;
