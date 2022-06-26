@@ -1,4 +1,14 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import {
+  Container,
+  TopSide,
+  RepositoryIcon,
+  BottomSide,
+  StarIcon,
+  ForkIcon
+} from './repositoryCardStyles';
 
 interface Props {
   username: string;
@@ -9,18 +19,49 @@ interface Props {
   forks: number;
 }
 
-
-const RepositoryCard: React.FC<Props> = ( {
+const RepositoryCard: React.FC<Props> = ({
   username,
   reponame,
   description,
   language,
   stars,
-  forks,
+  forks
 } ) => {
-  return (
-    <div/>
-  )
-}
 
-export default RepositoryCard
+  // If language is not provided pass in lowercase the name of the language to CSS so I can change the color. If not provided, pass in 'other' wich will be the default color.
+  const languageClass = language ? language.toLowerCase() : 'other';
+
+  return (
+    <Container>
+
+      <TopSide>
+        <header>
+          <RepositoryIcon />
+          {/* internal route page to show the repository */}
+          <Link to={`/${username}/${reponame}`}>{reponame}</Link>
+        </header>
+        <p>{ description }</p>
+      </TopSide>
+
+      <BottomSide>
+        <ul>
+          <li>
+            <div className={`laguage ${languageClass}`} />
+            <span>{`language ${language}`}</span>
+          </li>
+          <li>
+          <StarIcon />
+            <span>{stars}</span>
+          </li>
+          <li>
+            <ForkIcon />
+            <span>{forks}</span>
+          </li>
+        </ul>
+      </BottomSide>
+
+    </Container>
+  );
+};
+
+export default RepositoryCard;

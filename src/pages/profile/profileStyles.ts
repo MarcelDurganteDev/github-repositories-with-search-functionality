@@ -3,33 +3,30 @@ import styled from 'styled-components';
 // most outer container
 
 export const Container = styled.div`
---horizontalPadding: 16px;
---verticalPadding: 24px;
+  --horizontalPadding: 16px;
+  --verticalPadding: 24px;
 
-padding: var(--verticalPadding) var(--horizontalPadding);
+  padding: var(--verticalPadding) var(--horizontalPadding);
 `;
 
 export const Main = styled.div`
-display: flex;
-flex-direction: column;
-margin: 0 auto;
-// same max width as in GitHub 
-max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  // same max width as in GitHub
+  max-width: 1280px;
 
-@media (min-width: 768px) {
-  flex-direction: row;
-}
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
-
 
 export const LeftSide = styled.div`
-
-// github division is 25% for the left side on web view and 75% for the right side 
-@media (min-width: 768px) {
-  width: 25%;
-}
+  // github division is 25% for the left side on web view and 75% for the right side
+  @media (min-width: 768px) {
+    width: 25%;
+  }
 `;
-
 
 export const RightSide = styled.div`
   @media (min-width: 768px) {
@@ -40,16 +37,19 @@ export const RightSide = styled.div`
 export const RepositoriesList = styled.div`
   margin-top: var(--verticalPadding);
 
-  h2 {
+  > h2 {
     font-size: 16px;
     font-weight: normal;
   }
 
-  div {
+  > div {
     margin-top: 8px;
     display: grid;
     grid-gap: 16px;
     grid-template-columns: 1fr;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 `;
-
