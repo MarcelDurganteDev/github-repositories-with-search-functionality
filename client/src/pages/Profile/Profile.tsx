@@ -9,6 +9,8 @@ import {
   RepositoryIcon,
   Tab
 } from './profileStyles';
+import Header from '../../components/Header/Header'
+
 import ProfileData from '../../components/ProfileData/ProfileData';
 import RepositoryCard from '../../components/RepositoryCard/RepositoryCard';
 import { APIUser, APIRepo } from '../../../src/@types/customTypes';
@@ -80,52 +82,55 @@ const Profile: React.FC = () => {
   );
 
   return (
-    <Container>
-      <Main>
-        <LeftSide>
-          <ProfileData
-            username={data.user.login}
-            name={data.user.name}
-            avatarUrl={data.user.avatar_url}
-            followers={data.user.followers}
-            following={data.user.following}
-            company={data.user.company}
-            location={data.user.location}
-            email={data.user.email}
-            blog={data.user.blog}
-          />
-        </LeftSide>
-        <RightSide>
-          <Tab className='mobile'>
-            <TabContent />
-            <span className='line'></span>
-          </Tab>
-          {/* @TODO repo list */}
-          <RepositoriesList>
-            <h2>Repositories</h2>
-            <div>
-              {data.repos.map(repo => (
-                <RepositoryCard
-                  // not sure whether is best to use name or id as key
-                  // @TODO: check this
-                  key={repo.name}
-                  username={repo.owner.login}
-                  reponame={repo.name}
-                  description={repo.description}
-                  // not sure if this is the best way to do this but I do not want all to be just one lenguage. So for testing I will use this.
-                  language={repo.language}
-                  stars={repo.stargazers_count}
-                  forks={repo.forks}
-                />
-              ))}
-            </div>
-          </RepositoriesList>
-          {/* @TODO: <RandomCalendar /> . Try find a replacement for react-heatmap-calendar that is not working with React 18.1.0 
+    <>
+      <Header />
+      <Container>
+        <Main>
+          <LeftSide>
+            <ProfileData
+              username={data.user.login}
+              name={data.user.name}
+              avatarUrl={data.user.avatar_url}
+              followers={data.user.followers}
+              following={data.user.following}
+              company={data.user.company}
+              location={data.user.location}
+              email={data.user.email}
+              blog={data.user.blog}
+            />
+          </LeftSide>
+          <RightSide>
+            <Tab className='mobile'>
+              <TabContent />
+              <span className='line'></span>
+            </Tab>
+            {/* @TODO repo list */}
+            <RepositoriesList>
+              <h2>Repositories</h2>
+              <div>
+                {data.repos.map(repo => (
+                  <RepositoryCard
+                    // not sure whether is best to use name or id as key
+                    // @TODO: check this
+                    key={repo.name}
+                    username={repo.owner.login}
+                    reponame={repo.name}
+                    description={repo.description}
+                    // not sure if this is the best way to do this but I do not want all to be just one lenguage. So for testing I will use this.
+                    language={repo.language}
+                    stars={repo.stargazers_count}
+                    forks={repo.forks}
+                  />
+                ))}
+              </div>
+            </RepositoriesList>
+            {/* @TODO: <RandomCalendar /> . Try find a replacement for react-heatmap-calendar that is not working with React 18.1.0 
           Check this one if time allows  https://www.npmjs.com/package/@uiw/react-heat-map
           */}
-        </RightSide>
-      </Main>
-    </Container>
+          </RightSide>
+        </Main>
+      </Container>
+    </>
   );
 };
 
