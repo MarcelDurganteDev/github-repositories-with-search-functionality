@@ -500,3 +500,7 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/node
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,windows,macos,node,react,test,git
+
+# config file 
+
+config/
