@@ -1,7 +1,9 @@
 import React from 'react'
-import { Wrapper, Container } from './loginStyles';
+import { Wrapper, Container } from './loginPageStyles';
 
-const Login = () => {
+export interface ILoginPageProps {}
+
+const LoginPage: React.FunctionComponent<ILoginPageProps> = (props) => {
   return (
     <Wrapper>
       <Container>
@@ -12,4 +14,4 @@ const Login = () => {
   );
 }
 
-export default Login
+export default LoginPage
