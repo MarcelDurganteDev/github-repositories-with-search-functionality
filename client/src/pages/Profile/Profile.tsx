@@ -11,7 +11,7 @@ import {
 } from './profileStyles';
 import ProfileData from '../../components/ProfileData/ProfileData';
 import RepositoryCard from '../../components/RepositoryCard/RepositoryCard';
-import { APIUser, APIRepo } from '../../@types/customTypes';
+import { APIUser, APIRepo } from '../../../src/@types/customTypes';
 
 //  receives user, repositories, and/or error data (so I can show the error message) from the API
 // '?' optional case sth is not found/error
@@ -47,9 +47,16 @@ const Profile: React.FC = () => {
       const user = await userResponse.json();
       const repos = await repoResponse.json();
 
+      // randomize the order of the repositories list 
+      const shuffledRepos = repos.sort( () => Math.random() - 0.5 );
+      // output the first 6 repositories
+      const slicedRepos = shuffledRepos.slice( 0, 6 ); 
+      
+
       setData({
         user,
-        repos
+        // slicedRepos is an array of 6 repositories
+        repos: slicedRepos
       });
     });
   }, [username] );

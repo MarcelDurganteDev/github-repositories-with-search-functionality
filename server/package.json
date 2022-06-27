@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server side of GitHub Repository With Search Functionality App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcelDurganteDev/github-repositories-with-search-functionality.git"
+  },
+  "keywords": [
+    "github",
+    "search",
+    "repositories",
+    "user",
+    "repos"
+  ],
+  "author": "Marcel Durgante",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MarcelDurganteDev/github-repositories-with-search-functionality/issues"
+  },
+  "homepage": "https://github.com/MarcelDurganteDev/github-repositories-with-search-functionality#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
