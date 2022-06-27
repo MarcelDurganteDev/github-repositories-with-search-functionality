@@ -15,7 +15,7 @@ initializeApp(config.firebaseConfig);
 
 export interface IApplicationProps {}
 
-const App: React.FunctionComponent<IApplicationProps> = (props) => {
+const App: React.FC<IApplicationProps> = (props) => {
   return (
     <BrowserRouter>
       <Routes>
