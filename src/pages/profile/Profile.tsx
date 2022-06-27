@@ -52,7 +52,16 @@ const Profile: React.FC = () => {
         repos
       });
     });
-  }, []);
+  }, [] );
+
+  // if data error show message to user else show profile data and repositories
+  if ( data?.error ) {
+    return <h1>{data.error}</h1>;
+  }
+// if data (user or repo) is not loaded yet, show loading message 
+  if ( !data?.user || !data?.repos ) {
+    return <h1>Loading...</h1>;
+  }
 
   const TabContent = () => (
     <div className='content'>
