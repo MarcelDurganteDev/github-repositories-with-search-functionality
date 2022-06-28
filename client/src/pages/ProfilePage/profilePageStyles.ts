@@ -2,11 +2,9 @@ import styled from 'styled-components';
 import { RiBookMarkLine } from 'react-icons/ri';
 
 // most outer container
-
 export const Container = styled.div`
   --horizontalPadding: 16px;
   --verticalPadding: 24px;
-
   padding: var(--verticalPadding) var(--horizontalPadding);
 `;
 
@@ -17,7 +15,6 @@ export const Main = styled.div`
   // same max width as in GitHub
   // @TODO: check why it is only working with '!important'
   max-width: 1280px !important;
-
   @media (min-width: 768px) {
     flex-direction: row;
   }
@@ -39,18 +36,15 @@ export const RightSide = styled.div`
 
 export const RepositoriesList = styled.div`
   margin-top: var(--verticalPadding);
-
   > h2 {
     font-size: 16px;
     font-weight: normal;
   }
-
   > div {
     margin-top: 8px;
     display: grid;
     grid-gap: 16px;
     grid-template-columns: 1fr;
-
     @media (min-width: 768px) {
       grid-template-columns: 1fr 1fr;
     }
@@ -65,7 +59,6 @@ export const RepositoryIcon = styled(RiBookMarkLine)`
 
 export const Tab = styled.div`
   background: var(--primary);
-
   .content {
     display: flex;
     // vertical center of the tab
@@ -73,13 +66,11 @@ export const Tab = styled.div`
     width: min-content;
     padding: 14px 16px;
     border-bottom: 2px solid var(--orange);
-
     .label {
       font-size: 14px;
       font-weight: 600;
       padding: 0 7px;
     }
-
     .number {
       font-size: 12px;
       background-color: var(--ticker);
@@ -97,23 +88,9 @@ export const Tab = styled.div`
   // fot tab class mobile view only adds space between tab and user info (right side vs. left side)
   &.mobile {
     margin-top: var(--verticalPadding);
-
     // content of tab class mobile horizontaly aligned (auto)
     .content {
       margin: 0 auto;
     }
-  }
-`;
-
-export const LogoutButton = styled.button`
-  background: var(--orange);
-  border-radius: 4px;
-  border: none;
-  padding: 4px 8px;
-  color: var(--background);
-  cursor: pointer;
-
-  &:hover {
-    background: var(--orangeHover);
   }
 `;

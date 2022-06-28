@@ -1,13 +1,12 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
-interface IUser {
-  isLoggedIn: boolean;
-  performLogin: () => void;
-  performLogout: () => void;
-}
 
-export const UserContext = createContext<IUser>( {
+export const UserContext = createContext({
   isLoggedIn: false,
-  performLogin: () => { },
-  performLogout: () => { }
-} );
+  performLogin: () => {
+    return window.localStorage.setItem('isLoggedIn', 'true');
+  },
+  performLogout: () => {
+    return window.localStorage.setItem('isLoggedIn', 'false');
+  }
+});

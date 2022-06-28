@@ -8,7 +8,7 @@ export const UserProvider: FC<PropsWithChildren<UserProviderProps>> = ( { childr
   const [isLoggedIn, setLoggedIn] = useState( false );
   
   const performLogin = () => setLoggedIn( true );
-  const performLogout = () => setLoggedIn( true );
+  const performLogout = () => setLoggedIn( false );
 
   return (
 

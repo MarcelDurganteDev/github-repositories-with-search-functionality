@@ -1,4 +1,4 @@
-import React from 'react';
+import {FC} from 'react';
 
 import {
   Container,
@@ -26,7 +26,7 @@ interface Props {
   blog?: string;
 }
 
-const ProfileData: React.FC<Props> = ({
+const ProfileData: FC<Props> = ({
   username,
   name,
   avatarUrl,

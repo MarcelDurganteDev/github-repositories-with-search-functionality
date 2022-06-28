@@ -9,9 +9,11 @@ const LoginPage: FC = () => {
   const { performLogin } = useContext( UserContext );
   const navigate = useNavigate();
 
-  const handleLogin = ( ) => {
+  const handleLogin = () => {
+    
     performLogin();
-    navigate( '/' );
+    navigate('/');
+
   }
 
   return (

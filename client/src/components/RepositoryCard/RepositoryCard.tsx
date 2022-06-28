@@ -1,4 +1,4 @@
-import React from 'react';
+import {FC} from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -19,7 +19,7 @@ interface Props {
   forks: number;
 }
 
-const RepositoryCard: React.FC<Props> = ({
+const RepositoryCard: FC<Props> = ({
   username,
   reponame,
   description,
