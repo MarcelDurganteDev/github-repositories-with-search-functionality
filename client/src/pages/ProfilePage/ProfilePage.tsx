@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { FC, useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../store/contexts/UserContext';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Container,
   Main,
@@ -7,70 +8,62 @@ import {
   RightSide,
   RepositoriesList,
   RepositoryIcon,
-  Tab
+  Tab,
+  LogoutButton
 } from './profilePageStyles';
-import Header from '../../components/Header/Header'
 
+import Header from '../../components/Header/Header';
 import ProfileData from '../../components/ProfileData/ProfileData';
 import RepositoryCard from '../../components/RepositoryCard/RepositoryCard';
 import { APIUser, APIRepo } from '../../@types/customTypes';
 
-//  receives user, repositories, and/or error data (so I can show the error message) from the API
-// '?' optional case sth is not found/error
 interface Data {
   user?: APIUser;
-  // list of repositories
   repos?: APIRepo[];
   error?: string;
 }
 
-const Profile: React.FC = () => {
+export const Profile: FC = () => {
   // get username from url params
   const { username = 'MarcelDurganteDev' } = useParams();
   const [data, setData] = useState<Data>();
-  // after comoponent is mounted, get user data from API
+  const { isLoggedIn, performLogout } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/login');
+    }
+  }, [isLoggedIn]);
+
   useEffect(() => {
     Promise.all([
       fetch(`https://api.github.com/users/${username}`),
       fetch(`https://api.github.com/users/${username}/repos`)
     ]).then(async responses => {
-      // console.log(responses);
-      // console.log( [
-      //   await responses[0].json(),
-      //   await responses[1].json(),
-      // ]);
       const [userResponse, repoResponse] = responses;
-
       if (userResponse.status === 404) {
         setData({ error: 'User not found!' });
         return;
       }
-
       const user = await userResponse.json();
       const repos = await repoResponse.json();
-
-      // randomize the order of the repositories list 
-      const shuffledRepos = repos.sort( () => Math.random() - 0.5 );
-      // output the first 6 repositories
-      const slicedRepos = shuffledRepos.slice( 0, 6 ); 
-      
-
-      setData({
-        user,
-        // slicedRepos is an array of 6 repositories
-        repos: slicedRepos
-      });
+      // randomize the order of the repositories list
+      const shuffledRepos = repos.sort(() => Math.random() - 0.5);
+      //output the first 6 repositories
+      const slicedRepos = shuffledRepos.slice(0, 6);
+      //slicedRepos is an array of 6 repositories
+      setData({ user, repos: slicedRepos });
     });
-  }, [username] );
-
- 
+  }, [username]);
 
   // if data error show message to user else show profile data and repositories
-  if ( data?.error ) {
+  if (data?.error) {
     return <h1>{data.error}</h1>;
   }
-// if data (user or repo) is not loaded yet, show loading message 
-  if ( !data?.user || !data?.repos ) {
+  //if data (user or repo) is not loaded yet, show loading message
+  if (!data?.user || !data?.repos) {
     return <h1>Loading...</h1>;
   }
 
@@ -78,7 +71,7 @@ const Profile: React.FC = () => {
     <div className='content'>
       <RepositoryIcon />
       <span className='label'>Repositories</span>
-     {/* if I don't use 'data.user?' I get undefined error. This I believe is because here I am not sure if user is loaded or not */}
+      {/* if I don't use 'data.user?' I get undefined error. This I believe is because here I am not sure if user is loaded or not */}
       <span className='number'>{data.user?.public_repos}</span>
     </div>
   );
@@ -100,6 +93,7 @@ const Profile: React.FC = () => {
               email={data.user.email}
               blog={data.user.blog}
             />
+            <LogoutButton onClick={performLogout}>Logout</LogoutButton>
           </LeftSide>
           <RightSide>
             <Tab className='mobile'>

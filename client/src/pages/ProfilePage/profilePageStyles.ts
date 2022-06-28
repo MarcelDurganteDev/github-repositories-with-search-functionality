@@ -87,7 +87,7 @@ export const Tab = styled.div`
       border-radius: 24px;
     }
   }
- // @TODO: on desktop view line should pass behind avatar image
+  // @TODO: on desktop view line should pass behind avatar image
   .line {
     display: flex;
     width: 100%;
@@ -102,5 +102,18 @@ export const Tab = styled.div`
     .content {
       margin: 0 auto;
     }
+  }
+`;
+
+export const LogoutButton = styled.button`
+  background: var(--orange);
+  border-radius: 4px;
+  border: none;
+  padding: 4px 8px;
+  color: var(--background);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--orangeHover);
   }
 `;
