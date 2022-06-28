@@ -1,36 +1,32 @@
-import React, { useState } from 'react';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import React from 'react';
+
 import { useNavigate } from 'react-router-dom';
-
 import { Wrapper, Container } from './loginPageStyles';
+import { GithubLoginButton } from 'react-social-login-buttons';
+import firebase from 'firebase/compat/app';
+import 'firebase/auth';
 
-export interface ILoginPageProps {}
+export interface ILoginPageProps {
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const LoginPage: React.FunctionComponent<ILoginPageProps> = props => {
-  const auth = getAuth();
-  const navigate = useNavigate();
+const LoginPage: React.FC<ILoginPageProps> = ({ setIsAuthenticated }) => {
+  let navigate = useNavigate()
+  
 
-  const [authing, setAuthing] = useState(false);
-
-  const signInWithGoogle = async () => {
-    setAuthing(true);
-
-    signInWithPopup(auth, new GoogleAuthProvider()).then(response => {
-      console.log(response.user.uid);
-      setAuthing(false);
-      navigate('/profile');
-    } )
-      .catch( error => {
-        console.log(error);
-        setAuthing(false);
-      });
-  };
+  // const signInWithGithub = async () => {
+  //   const GithubProvider = new firebase.auth.GithubAuthProvider();
+  //   await firebase.auth().signInWithPopup( GithubProvider );
+  //   setIsAuthenticated( true );
+  //   navigate( '/', { replace: true } );
+  //   console.log('hi');
+  // };
 
   return (
     <Wrapper>
       <Container>
         <h1>Welcome to your Search GitHub Users and Reposotories APP!</h1>
-        <button onClick={()=> signInWithGoogle()} disabled={authing}>Login with your GitHub</button>
+        <GithubLoginButton  align='center' />
       </Container>
     </Wrapper>
   );

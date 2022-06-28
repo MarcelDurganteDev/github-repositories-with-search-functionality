@@ -8,12 +8,12 @@ import {
   RepositoriesList,
   RepositoryIcon,
   Tab
-} from './profileStyles';
+} from './profilePageStyles';
 import Header from '../../components/Header/Header'
 
 import ProfileData from '../../components/ProfileData/ProfileData';
 import RepositoryCard from '../../components/RepositoryCard/RepositoryCard';
-import { APIUser, APIRepo } from '../../../src/@types/customTypes';
+import { APIUser, APIRepo } from '../../@types/customTypes';
 
 //  receives user, repositories, and/or error data (so I can show the error message) from the API
 // '?' optional case sth is not found/error
@@ -62,6 +62,8 @@ const Profile: React.FC = () => {
       });
     });
   }, [username] );
+
+ 
 
   // if data error show message to user else show profile data and repositories
   if ( data?.error ) {
