@@ -80,13 +80,13 @@ export const ProfilePage: FC = () => {
       const user = await userResponse.json();
       const repos = await reposResponse.json();
 
-      // randomize the order of the RepositoriesPagelist. Output the first 6 repositories
-      const shuffledRepos = repos.sort(() => Math.random() - 0.5);
-      // Array of 6 repositories
-      const slicedRepos = shuffledRepos.slice(0, 6);
+      // // randomize the order of the RepositoriesPagelist. Output the first 6 repositories
+      // const shuffledRepos = repos.sort(() => Math.random() - 0.5);
+      // // Array of 6 repositories
+      // const slicedRepos = shuffledRepos.slice(0, 6);
       setData({
         user,
-        repos: slicedRepos
+        repos
       });
     });
   }, [username]);
