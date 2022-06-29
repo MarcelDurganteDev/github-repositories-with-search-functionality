@@ -1,3 +1,17 @@
+/**
+ * @description: ProfilePage is used to display the user profile. It is used in the App component. It shows Header, ProfileData and RepositoryList components.
+ *
+ * @returns: JSX. Element ProfilePage component with: Container is used to wrap the entire component. Flex is used to align the component. Main is used to display the user profile (left side) and RepositoriesPagelist (right side).
+ *
+ * @interface Props ( in Typescript for an element to receive props, an interface must be defined )
+ *
+ * @props user : user data of the user. From APIUser call in custom hook (customTypes.tsx)
+ * @props repos : list of RepositoriesPageof the user. From APIUser call in custom hook (customTypes.tsx)
+ * @error error : data error of the user. From APIUser call in custom hook (customTypes.tsx)
+ *
+ * @memberof ProfilePage
+ */
+
 import { FC, useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../store/contexts/UserContext';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -6,9 +20,9 @@ import {
   Main,
   LeftSide,
   RightSide,
-  RepositoriesList,
+  RepositoriesPage,
   RepositoryIcon,
-  Tab,
+  Tab
 } from './profilePageStyles';
 
 import Header from '../../components/Header/Header';
@@ -16,7 +30,7 @@ import ProfileData from '../../components/ProfileData/ProfileData';
 import RepositoryCard from '../../components/RepositoryCard/RepositoryCard';
 import { APIUser, APIRepo } from '../../@types/customTypes';
 
-const data = require('../../db/data.json');
+// const data = require('../../db/data.json');
 
 interface Data {
   user?: APIUser;
@@ -24,13 +38,13 @@ interface Data {
   error?: string;
 }
 
-export const Profile: FC = () => {
+export const ProfilePage: FC = () => {
   // get username from url params
   const { username = 'MarcelDurganteDev' } = useParams();
-  // const [data, setData] = useState<Data>();
-  const { isLoggedIn } = useContext( UserContext );
+  const [data, setData] = useState<Data>();
+  const { isLoggedIn } = useContext(UserContext);
 
-  const [ slicedRepos, setSlicedRepos ] = useState<APIRepo[]>([]);
+  const [slicedRepos, setSlicedRepos] = useState<APIRepo[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,47 +53,53 @@ export const Profile: FC = () => {
     }
   }, [isLoggedIn]);
 
-  // useEffect(() => {
-  //   Promise.all( [
-      
-  //     // fetch(`https://api.github.com/users/${username}`),
-  //     // fetch(`https://api.github.com/users/${username}/repos`)
-  //   ]).then(async responses => {
-  //     const [userResponse, repoResponse] = responses;
-  //     if ( userResponse.status === 404 ) {
-  //       setData({ error: 'User not found!' });
-  //       return;
-  //     }
-  //     const user = await userResponse.json();
-  //     const repos = await repoResponse.json();
+  useEffect(() => {
+    Promise.all([
+      // fetch(`https://api.github.com/users/${username}`),
+      // fetch(`https://api.github.com/users/${username}/repos`)
+    ]).then(async responses => {
+      const [userResponse, repoResponse] = responses;
+      if (userResponse.status === 404) {
+        setData({ error: 'User not found!' });
+        return;
+      }
+      const user = await userResponse.json();
+      const repos = await repoResponse.json();
 
-  //     // randomize the order of the repositories list
-  //     //output the first 6 repositories
-  //    // const slicedRepos = repos.slice(0, 6);
-  //     //slicedRepos is an array of 6 repositories
-  //     setData({ user, repos });
-  //   });
-  // }, [username] );
+      // randomize the order of the RepositoriesPagelist
+      //output the first 6 repositories
+      // const slicedRepos = repos.slice(0, 6);
+      //slicedRepos is an array of 6 repositories
+      setData({ user, repos });
+    });
+  }, [sdfs]);
 
-  useEffect( () => {
-   
-    const sortedRepos = data.repos.sort( () => Math.random() - 0.5 );
-    const slicedRepos = sortedRepos.slice( 0, 6 );
-    setSlicedRepos( slicedRepos );
-  }, [data.repos] );
+  // useEffect( () => {
 
-console.log(data);
+  //   const sortedRepos = data.repos.sort( () => Math.random() - 0.5 );
+  //   const slicedRepos = sortedRepos.slice( 0, 6 );
+  //   setSlicedRepos( slicedRepos );
+  // }, [data.repos] );
 
+  console.log(data);
 
   // if data error show message to user else show profile data and repositories
   if (data?.error) {
     return <h1>{data.error}</h1>;
   }
-  
+
   //if data (user or repo) is not loaded yet, show loading message
   if (!data?.user || !data?.repos) {
     return <h1>Loading...</h1>;
   }
+
+  /**
+   * @description: TabContent is used to display the bar of tabs in the right side of the Profile Page.
+   *
+   * @returns: JSX. Element TabContent component with: RepositoryIcon and the number of RepositoriesPageof the user.
+   *
+   * @todo: implement overview and projects tabs
+   */
 
   const TabContent = () => (
     <div className='content'>
@@ -93,6 +113,13 @@ console.log(data);
     <>
       <Header />
       <Container>
+        <Tab className='desktop'>
+          <div className='wrapper'>
+            <span className='offset' />
+            <TabContent />
+          </div>
+        </Tab>
+
         <Main>
           <LeftSide>
             <ProfileData
@@ -107,15 +134,17 @@ console.log(data);
               blog={data.user.blog}
             />
           </LeftSide>
+
           <RightSide>
             <Tab className='mobile'>
               <TabContent />
               <span className='line'></span>
             </Tab>
-            <RepositoriesList>
+
+            <RepositoriesPage>
               <h2>Repositories</h2>
               <div>
-                {slicedRepos.map( repo => (
+                {slicedRepos.map(repo => (
                   <RepositoryCard
                     key={repo.name}
                     username={repo.owner.login}
@@ -127,7 +156,7 @@ console.log(data);
                   />
                 ))}
               </div>
-            </RepositoriesList>
+            </RepositoriesPage>
           </RightSide>
         </Main>
       </Container>
@@ -135,4 +164,4 @@ console.log(data);
   );
 };
 
-export default Profile;
+export default ProfilePage;

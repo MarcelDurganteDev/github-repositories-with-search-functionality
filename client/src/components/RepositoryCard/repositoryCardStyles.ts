@@ -5,7 +5,7 @@ import { AiOutlineFork } from 'react-icons/ai';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  // if the description is too long and it's using two collumns (see media query for the div in RepositoriesList profileStyle.ts ) TopSide and BottomSide will take the same space there for it matchs the space of the other side.
+  // if the description is too long and it's using two collumns (see media query for the div in RepositoriesPageprofileStyle.ts ) TopSide and BottomSide will take the same space there for it matchs the space of the other side.
   justify-content: space-between;
   padding: 16px;
   border: 1px solid var(--border);

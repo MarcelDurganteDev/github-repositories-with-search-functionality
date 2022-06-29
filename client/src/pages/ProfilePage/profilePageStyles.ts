@@ -34,7 +34,7 @@ export const RightSide = styled.div`
   }
 `;
 
-export const RepositoriesList = styled.div`
+export const RepositoriesPage = styled.div`
   margin-top: var(--verticalPadding);
   > h2 {
     font-size: 16px;
@@ -81,8 +81,9 @@ export const Tab = styled.div`
   // @TODO: on desktop view line should pass behind avatar image
   .line {
     display: flex;
-    width: 100%;
-    border-bottom: 2px solid var(--border);
+    width: 200vh;
+    border-bottom: 1px solid var(--border);
+    margin-left: -50vw;
   }
 
   // fot tab class mobile view only adds space between tab and user info (right side vs. left side)
@@ -91,6 +92,25 @@ export const Tab = styled.div`
     // content of tab class mobile horizontaly aligned (auto)
     .content {
       margin: 0 auto;
+    }
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  &.desktop {
+    display: none;
+    @media (min-width: 768px) {
+      display: unset;
+      .wrapper {
+        display: flex;
+        margin: 0 auto;
+        max-width: 1280px;
+      }
+      .offset {
+        width: 25%;
+        margin-right: var(--horizontalPadding);
+      }
     }
   }
 `;

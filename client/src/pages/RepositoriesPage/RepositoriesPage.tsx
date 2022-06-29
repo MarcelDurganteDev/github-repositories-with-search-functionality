@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-
+import { APIRepo } from '../../@types/customTypes';
 import {
   Container,
   Breadcrumb,
@@ -10,18 +10,18 @@ import {
   ForkIcon,
   LinkButton,
   GithubIcon
-} from './repositoryPage';
-
-import { APIRepo } from '../../../src/@types/customTypes'
+} from './RepositoriesPageStyles'
+// const data = require('../../db/data.json');
 
 interface Data {
   repo?: APIRepo;
   error?: string;
 }
 
-const Repo: React.FC = () => {
+const RepositoriesPage: FC = () => {
   const { username, reponame } = useParams();
   const [data, setData] = useState<Data>();
+  // const [repoData, setRepoData] = useState<Data>();
 
   useEffect(() => {
     fetch(`https://api.github.com/repos/${username}/${reponame}`).then(
@@ -33,7 +33,13 @@ const Repo: React.FC = () => {
         );
       }
     );
-  }, [reponame, username]);
+
+    if (data) {
+      // setRepoData(data);
+    }
+  }, []);
+
+  // console.log(repoData);
 
   if (data?.error) {
     return <h1>{data.error}</h1>;
@@ -82,4 +88,4 @@ const Repo: React.FC = () => {
   );
 };
 
-export default Repo;
+export default RepositoriesPage;
