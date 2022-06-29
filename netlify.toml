@@ -1,0 +1,11 @@
+# example netlify.toml
+[[redirects]]
+from = "/*"
+to = "/index.html
+status = 200
+[build]
+  command = "npm run build"
+  functions = "netlify/functions"
+  publish = "build"
+
+ 

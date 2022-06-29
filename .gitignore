@@ -504,3 +504,5 @@ dist
 # config file 
 
 config/
+# Local Netlify folder
+.netlify
