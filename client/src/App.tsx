@@ -6,9 +6,18 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import RepositoriesPage from './pages/RepositoriesPage/RepositoriesPage';
 import Header from './components/Header/Header';
 
+
 export interface IApplicationProps {}
 
 const App: FC<IApplicationProps> = () => {
+
+//   const navigate = useNavigate();
+
+//  const loginStorage =  window.localStorage.getItem( 'isLoggedIn' )
+//   if ( loginStorage === 'false' || null ) {
+//     navigate('/login');
+//   }
+
   return (
     <BrowserRouter>
       <Header />

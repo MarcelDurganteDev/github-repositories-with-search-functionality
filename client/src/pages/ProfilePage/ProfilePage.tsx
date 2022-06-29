@@ -13,7 +13,7 @@
  */
 
 import { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Container,
   Main,
@@ -28,6 +28,7 @@ import {
 import ProfileData from '../../components/ProfileData/ProfileData';
 import RepositoryCard from '../../components/RepositoryCard/RepositoryCard';
 import { APIUser, APIRepo } from '../../@types/customTypes';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 // interface Data is a state of the component that can receives a user loaded as soon as we load the page/component. They are optional as they can throw an error if the user is not found.
 interface Data {
@@ -37,6 +38,20 @@ interface Data {
 }
 
 export const ProfilePage: FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useLocalStorage('isLoggedIn', () => {
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      return true;
+    } else {
+      return false;
+    }
+  } );
+  
+  const navigate = useNavigate();
+
+  if (isLoggedIn === false) {
+    navigate('/login');
+  }
+
   // hook to get username from url params
   const { username = 'MarcelDurganteDev' } = useParams();
   // data type APIUSer or APIRepo or APIError
