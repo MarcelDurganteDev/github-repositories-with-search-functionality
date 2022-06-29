@@ -1,3 +1,16 @@
+/**
+ * @description: RepositoriesPage component is used to display the list of repositories. It shows Breadcrumb, link to User and Repo, Stats and LinkButton to view on GitHub.
+ *
+ * @returns: JSX. Element RepositoriesPage component with: Container is used to wrap the entire component.
+ *
+ * @interface Props Data ( in Typescript for an element to receive props, an interface must be defined )
+ *
+ * @props repos : repos data of the user. From APIUser call in custom hook (customTypes.tsx)
+ * @props error : error data of the user. From APIUser call in custom hook (customTypes.tsx)
+ *
+ * @memberof RepositoriesPage
+ */
+
 import { FC, useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { APIRepo } from '../../@types/customTypes';
@@ -10,8 +23,7 @@ import {
   ForkIcon,
   LinkButton,
   GithubIcon
-} from './RepositoriesPageStyles'
-// const data = require('../../db/data.json');
+} from './RepositoriesPageStyles';
 
 interface Data {
   repo?: APIRepo;
@@ -33,18 +45,11 @@ const RepositoriesPage: FC = () => {
         );
       }
     );
-
-    if (data) {
-      // setRepoData(data);
-    }
-  }, []);
-
-  // console.log(repoData);
+  }, [reponame, username]);
 
   if (data?.error) {
     return <h1>{data.error}</h1>;
   }
-
   if (!data?.repo) {
     return <h1>Loading...</h1>;
   }
@@ -79,7 +84,7 @@ const RepositoriesPage: FC = () => {
           <span>forks</span>
         </li>
       </Stats>
-
+      {/* href an external link that throws user to github.com/username/reponame */}
       <LinkButton href={data.repo.html_url}>
         <GithubIcon />
         <span>View on GitHub</span>

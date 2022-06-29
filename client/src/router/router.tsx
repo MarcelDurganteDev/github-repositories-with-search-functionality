@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyles from '../styles/GlobalStyles';
-import { UserProvider } from '../store/providers/UserProvider';
-import { ProtectedRoute } from '../hooks/ProtectedRoute';
+// import { ProtectedRoute } from '../hooks/ProtectedRoute';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import RepositoriesPage from '../pages/RepositoriesPage/RepositoriesPage'
+import Header from '../components/Header/Header';
 
 export const Router: FC = () => {
   return (
@@ -21,8 +21,8 @@ export const Router: FC = () => {
     //   <GlobalStyles />
     // </BrowserRouter>
 
-    <UserProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Header/>
         <Routes>
           <Route path='/login' element={<LoginPage />} />
           <Route path='/' element={<ProfilePage />} />
@@ -31,6 +31,5 @@ export const Router: FC = () => {
         </Routes>
         <GlobalStyles />
       </BrowserRouter>
-    </UserProvider>
   );
 };

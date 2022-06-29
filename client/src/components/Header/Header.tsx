@@ -1,17 +1,18 @@
-import { FC, FormEvent, useState } from 'react';
+/**
+ * @description Header component is used to dipsplay on top of the page (main container in ProfilePage and RepositoriesPage) and it consists of the sercah bar (SearchFrom) and the logo.
+ */
+
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../store/contexts/UserContext';
 import { Container, GitHubLogo, SearchForm } from './headerStyles';
-const mockData = require('../../db/data.json');
 
 
-const Header: FC = () => {
+const Header: React.FC = () => {
   const [search, setSearch] = useState( '' );
   const navigate = useNavigate();
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-
     navigate('/' + search.toLowerCase().trim() );
   }
 
@@ -20,7 +21,7 @@ const Header: FC = () => {
       <GitHubLogo />
       <SearchForm onSubmit={handleSubmit}>
         <input
-          placeholder='Enter Username or Repository Name...'
+          placeholder='Enter Username or Username/Repository Name...'
           value={search}
           onChange={e => setSearch( e.currentTarget.value )}
         />
@@ -30,3 +31,5 @@ const Header: FC = () => {
 };
 
 export default Header;
+
+

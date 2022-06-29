@@ -1,3 +1,8 @@
+/**
+ * @description: Custom types for uder and repo, to extract just what we need from the API.Blog, company, email and location are optional for user. Language and description are optional for repo.
+ * 
+ */
+
 export interface APIUser {
   login: string;
   name: string;

@@ -12,9 +12,8 @@
  * @memberof ProfilePage
  */
 
-import { FC, useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../store/contexts/UserContext';
-import { useParams, useNavigate } from 'react-router-dom';
+import { FC, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   Container,
   Main,
@@ -25,13 +24,12 @@ import {
   Tab
 } from './profilePageStyles';
 
-import Header from '../../components/Header/Header';
+// import Header from '../../components/Header/Header';
 import ProfileData from '../../components/ProfileData/ProfileData';
 import RepositoryCard from '../../components/RepositoryCard/RepositoryCard';
 import { APIUser, APIRepo } from '../../@types/customTypes';
 
-// const data = require('../../db/data.json');
-
+// interface Data is a state of the component that can receives a user loaded as soon as we load the page/component. They are optional as they can throw an error if the user is not found.
 interface Data {
   user?: APIUser;
   repos?: APIRepo[];
@@ -39,55 +37,55 @@ interface Data {
 }
 
 export const ProfilePage: FC = () => {
-  // get username from url params
+  // hook to get username from url params
   const { username = 'MarcelDurganteDev' } = useParams();
+  // data type APIUSer or APIRepo or APIError
   const [data, setData] = useState<Data>();
-  const { isLoggedIn } = useContext(UserContext);
 
-  const [slicedRepos, setSlicedRepos] = useState<APIRepo[]>([]);
-  const navigate = useNavigate();
+  // const [slicedRepos, setSlicedRepos] = useState<APIRepo[]>([]);
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/login');
-    }
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   if (!isLoggedIn) {
+  //     navigate('/login');
+  //   }
+  // }, [isLoggedIn]);
 
   useEffect(() => {
     Promise.all([
-      // fetch(`https://api.github.com/users/${username}`),
-      // fetch(`https://api.github.com/users/${username}/repos`)
+      fetch(`https://api.github.com/users/${username}`),
+      fetch(`https://api.github.com/users/${username}/repos`)
     ]).then(async responses => {
-      const [userResponse, repoResponse] = responses;
+      // Response 1 User response and Response 2 Repos response
+      const [userResponse, reposResponse] = responses;
       if (userResponse.status === 404) {
         setData({ error: 'User not found!' });
         return;
       }
       const user = await userResponse.json();
-      const repos = await repoResponse.json();
+      const repos = await reposResponse.json();
 
-      // randomize the order of the RepositoriesPagelist
-      //output the first 6 repositories
-      // const slicedRepos = repos.slice(0, 6);
-      //slicedRepos is an array of 6 repositories
-      setData({ user, repos });
+      // randomize the order of the RepositoriesPagelist. Output the first 6 repositories
+      const shuffledRepos = repos.sort(() => Math.random() - 0.5);
+      // Array of 6 repositories
+      const slicedRepos = shuffledRepos.slice(0, 6);
+      setData({
+        user,
+        repos: slicedRepos
+      });
     });
-  }, [sdfs]);
+  }, [username]);
 
   // useEffect( () => {
-
-  //   const sortedRepos = data.repos.sort( () => Math.random() - 0.5 );
-  //   const slicedRepos = sortedRepos.slice( 0, 6 );
-  //   setSlicedRepos( slicedRepos );
+  //  const sortedRepos = data.repos.sort( () => Math.random() - 0.5 );
+  //  const slicedRepos = sortedRepos.slice( 0, 6 );
+  //  setSlicedRepos( slicedRepos );
   // }, [data.repos] );
 
-  console.log(data);
-
-  // if data error show message to user else show profile data and repositories
+  // if data error show message to user, else show profile data and repositories
   if (data?.error) {
     return <h1>{data.error}</h1>;
   }
-
   //if data (user or repo) is not loaded yet, show loading message
   if (!data?.user || !data?.repos) {
     return <h1>Loading...</h1>;
@@ -110,57 +108,54 @@ export const ProfilePage: FC = () => {
   );
 
   return (
-    <>
-      <Header />
-      <Container>
-        <Tab className='desktop'>
-          <div className='wrapper'>
-            <span className='offset' />
+    <Container>
+      <Tab className='desktop'>
+        <div className='wrapper'>
+          <span className='offset' />
+          <TabContent />
+        </div>
+      </Tab>
+
+      <Main>
+        <LeftSide>
+          <ProfileData
+            username={data.user.login}
+            name={data.user.name}
+            avatarUrl={data.user.avatar_url}
+            followers={data.user.followers}
+            following={data.user.following}
+            company={data.user.company}
+            location={data.user.location}
+            email={data.user.email}
+            blog={data.user.blog}
+          />
+        </LeftSide>
+
+        <RightSide>
+          <Tab className='mobile'>
             <TabContent />
-          </div>
-        </Tab>
+            <span className='line'></span>
+          </Tab>
 
-        <Main>
-          <LeftSide>
-            <ProfileData
-              username={data.user.login}
-              name={data.user.name}
-              avatarUrl={data.user.avatar_url}
-              followers={data.user.followers}
-              following={data.user.following}
-              company={data.user.company}
-              location={data.user.location}
-              email={data.user.email}
-              blog={data.user.blog}
-            />
-          </LeftSide>
-
-          <RightSide>
-            <Tab className='mobile'>
-              <TabContent />
-              <span className='line'></span>
-            </Tab>
-
-            <RepositoriesPage>
-              <h2>Repositories</h2>
-              <div>
-                {slicedRepos.map(repo => (
-                  <RepositoryCard
-                    key={repo.name}
-                    username={repo.owner.login}
-                    reponame={repo.name}
-                    description={repo.description}
-                    language={repo.language}
-                    stars={repo.stargazers_count}
-                    forks={repo.forks}
-                  />
-                ))}
-              </div>
-            </RepositoriesPage>
-          </RightSide>
-        </Main>
-      </Container>
-    </>
+          <RepositoriesPage>
+            <h2>Repositories</h2>
+            <div>
+              {data.repos.map(repo => (
+                <RepositoryCard
+                  key={repo.name}
+                  username={repo.owner.login}
+                  reponame={repo.name}
+                  description={repo.description}
+                  language={repo.language}
+                  stars={repo.stargazers_count}
+                  forks={repo.forks}
+                />
+              ))}
+            </div>
+          </RepositoriesPage>
+        </RightSide>
+      </Main>
+    </Container>
   );
 };
 
