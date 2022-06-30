@@ -33,7 +33,6 @@ interface Data {
 const RepositoriesPage: FC = () => {
   const { username, reponame } = useParams();
   const [data, setData] = useState<Data>();
-  // const [repoData, setRepoData] = useState<Data>();
 
   useEffect(() => {
     fetch(`https://api.github.com/repos/${username}/${reponame}`).then(

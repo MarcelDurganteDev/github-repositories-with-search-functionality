@@ -1,6 +1,5 @@
 import { FC } from 'react';
-import { Wrapper, Container } from './loginPageStyles';
-import { GithubLoginButton } from 'react-social-login-buttons';
+import { Wrapper, Container, GithubLoginButton } from './loginPageStyles';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage: FC = () => {
@@ -21,7 +20,7 @@ const LoginPage: FC = () => {
       <Container>
         <h1>Welcome to your Search GitHub Users and Reposotories APP!</h1>
         <button onClick={handleLogin}>
-          <GithubLoginButton align='center' />
+          <GithubLoginButton />
         </button>
       </Container>
     </Wrapper>

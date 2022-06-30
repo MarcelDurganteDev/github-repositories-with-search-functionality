@@ -27,8 +27,8 @@ import {
 // import Header from '../../components/Header/Header';
 import ProfileData from '../../components/ProfileData/ProfileData';
 import RepositoryCard from '../../components/RepositoryCard/RepositoryCard';
-import { APIUser, APIRepo } from '../../@types/customTypes';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { APIUser, APIRepo } from '../../@types/customTypes';
 
 // interface Data is a state of the component that can receives a user loaded as soon as we load the page/component. They are optional as they can throw an error if the user is not found.
 interface Data {
@@ -38,7 +38,7 @@ interface Data {
 }
 
 export const ProfilePage: FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useLocalStorage('isLoggedIn', () => {
+  const [isLoggedIn] = useLocalStorage('isLoggedIn', () => {
     if (localStorage.getItem('isLoggedIn') === 'true') {
       return true;
     } else {

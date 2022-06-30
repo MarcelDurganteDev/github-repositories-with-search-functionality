@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -16,4 +15,18 @@ position: absolute;
   transform: translate(-50%, -50%);
 `; 
   
-
+export const GithubLoginButton = styled.button`
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  &:hover {
+    background: #eaeaea;
+  }
+`;
