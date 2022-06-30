@@ -16,7 +16,7 @@ position: absolute;
 `; 
   
 export const GithubLoginButton = styled.button`
-  background: #fff;
+  background: var(--gray-dark);
   border: 1px solid #eaeaea;
   border-radius: 5px;
   padding: 10px;
@@ -24,9 +24,10 @@ export const GithubLoginButton = styled.button`
   margin-top: 10px;
   font-size: 16px;
   font-weight: bold;
-  color: #000;
+  color: var(--primary);
   cursor: pointer;
   &:hover {
     background: #eaeaea;
   }
+
 `;

@@ -20,7 +20,9 @@ const LoginPage: FC = () => {
       <Container>
         <h1>Welcome to your Search GitHub Users and Reposotories APP!</h1>
         <button onClick={handleLogin}>
-          <GithubLoginButton />
+          <GithubLoginButton>
+            Log in with GitHub
+          </GithubLoginButton>
         </button>
       </Container>
     </Wrapper>
