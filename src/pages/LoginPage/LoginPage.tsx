@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { Wrapper, Container } from './loginPageStyles';
 import { GithubLoginButton } from 'react-social-login-buttons';
 import { useNavigate } from 'react-router-dom';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const LoginPage: FC = () => {
   const navigate = useNavigate();
