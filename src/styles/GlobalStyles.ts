@@ -7,6 +7,11 @@ export default createGlobalStyle`
   box-sizing: border-box;
  } 
 
+ body {
+  overflow-x: hidden;
+  width: 100%;
+ }
+
   html {
     min-height: 100%;
     background: var(--primary);
