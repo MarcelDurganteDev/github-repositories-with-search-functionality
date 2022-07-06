@@ -7,6 +7,7 @@ import RepositoriesPage from '../pages/RepositoriesPage/RepositoriesPage'
 import Header from '../components/Header/Header';
 
 export const Router: FC = () => {
+  
   return (
     <BrowserRouter>
       <Header/>
