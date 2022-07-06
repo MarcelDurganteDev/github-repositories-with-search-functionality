@@ -22,7 +22,8 @@
 #### Link: https://marceldurgantedev.github.io/github-repositories-with-search-functionality/
 
 #### The application is also available on the [GitHub repository](
-#### Link: https://github.com/MarcelDurganteDev/github-repositories-with-search-functionality/blob/main/netlify.toml
+#### Link: https://githubuserreposearch.netlify.app/
+##### (deployed using Netlify)
 
 # Future improvements:
 
@@ -30,6 +31,7 @@
 ### Authentication with GitHub
 ### Testing
 ### UI/UX
+
 # Feedback: 
 
 ##### This was a great project. This is the first time I have worked with Typescritp and I am very happy with the result. I will continue to working on it and improve it.
