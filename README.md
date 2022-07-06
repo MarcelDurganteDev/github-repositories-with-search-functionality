@@ -19,10 +19,7 @@
 #### The application is running on the localhost:3000.
 #### To see the application in action, you can visit the following link:
 
-#### Link: https://marceldurgantedev.github.io/github-repositories-with-search-functionality/
-
-#### The application is also available on the [GitHub repository](
-#### Link: https://githubuserreposearch.netlify.app/
+### Link: https://githubuserreposearch.netlify.app/
 ##### (deployed using Netlify)
 
 # Future improvements:
