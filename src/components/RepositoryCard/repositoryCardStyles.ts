@@ -72,6 +72,15 @@ export const BottomSide = styled.div`
       &.typescript {
         background: var(--typescript);
       }
+      &.php {
+        background: var(--html);
+      }
+      &.php {
+        background: var(--php);
+      }
+      &.css {
+        background: var(--css);
+      }
     }
   }
 `;

@@ -49,7 +49,10 @@ ul {
   --calendar-scale-3: #30A14E;
   --calendar-scale-4: #216E3A;
   --javascript: #f1e05a;
-  --typescript: #2b7489;
+  --typescript: #3178c6;
+  --html: #f85149;
+  --PHP: #4F5D95;
+  --CSS: #563d7c;
   --other-language: #8257e5;
 }
  `;
